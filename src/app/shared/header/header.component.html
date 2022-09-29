@@ -43,17 +43,19 @@
                         <!-- Search -->
                         <!-- ============================================================== -->
                         <li class="nav-item hidden-xs-down search-box"> 
-                            <a class="nav-link hidden-sm-down waves-effect waves-dark" href="javascript:void(0)">
+                            <!-- <a class="nav-link hidden-sm-down waves-effect waves-dark" href="javascript:void(0)">
                                 <i class="ti-search"></i>
-                             </a>
+                             </a> -->
 
-                            <!-- <a class="nav-link hidden-sm-down waves-effect waves-dark"  href="javascript:void(0)">
+                            <a class="nav-link hidden-sm-down waves-effect waves-dark"  href="javascript:void(0)">
                                <i class="ti-search"></i>
-                            </a> -->
+                            </a>
                             
-                            <!-- <form class="app-search"  -->
-                            <form class="" 
+                            <!-- <form class="" 
                                 (submit)="buscar(txtTermino.value)"
+                            > -->
+                            <form class="app-search" 
+                            (submit)="buscar(txtTermino.value)"
                             >
                                 <input type="text" class="form-control" placeholder="Buscar colecciones"
                                     #txtTermino> 
