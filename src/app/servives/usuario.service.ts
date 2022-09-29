@@ -29,6 +29,11 @@ export class UsuarioService {
    }
 
 
+  get role():string {
+
+    return this.usuario?.role!;
+
+  }
 
   get token():string {
     return localStorage.getItem('token') || '';
@@ -49,6 +54,8 @@ export class UsuarioService {
 
   logout(){
     localStorage.removeItem('token');
+    localStorage.removeItem('menu');
+
 
     google.accounts.id.revoke('waldotorres.07@gmail.com', ()=>{
       
@@ -57,6 +64,14 @@ export class UsuarioService {
       } )
 
     } )
+
+    this.router.navigateByUrl('/login');
+
+  }
+
+  grabarLocalStorage( token:string, menu:any ){
+    localStorage.setItem('token', token  );
+    localStorage.setItem('menu', JSON.stringify( menu )  );
   }
 
   validarToken(): Observable<boolean> {
@@ -70,7 +85,7 @@ export class UsuarioService {
                   (resp:any) =>{
                     const { email, google, nombre, role, img, uid } = resp.usuario;
                     this.usuario = new Usuario(  uid, role, nombre, '', email, google, img);
-                    localStorage.setItem('token', resp.token  );
+                    this.grabarLocalStorage( resp.token, resp.menu )
                   
                     return true;
 
@@ -87,7 +102,7 @@ export class UsuarioService {
     return this.http.post( `${base_url}/usuarios` , formData )
             .pipe( 
               tap( (resp:any) => {
-                localStorage.setItem('token', resp.token  );
+                this.grabarLocalStorage( resp.token, resp.menu )
               }) 
             )
 
@@ -104,7 +119,7 @@ export class UsuarioService {
     return this.http.post( `${base_url}/login` , formData )
             .pipe( 
                     tap( (resp:any) => {
-                      localStorage.setItem('token', resp.token  );
+                      this.grabarLocalStorage( resp.token, resp.menu )
                     }) 
                   )
 
@@ -115,7 +130,7 @@ export class UsuarioService {
             .pipe( 
               tap (
                 (resp:any) => {
-                  localStorage.setItem('token', resp.token  );
+                  this.grabarLocalStorage( resp.token, resp.menu )
                 }
               )
              )
