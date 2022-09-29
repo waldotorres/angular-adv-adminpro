@@ -82,7 +82,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
     this.busquedaService.buscar( 'usuarios', termino)
       .subscribe( resp => {
 
-        this.usuarios = resp;
+        this.usuarios = resp as Usuario[];
 
       }, err => console.log(err) );
       

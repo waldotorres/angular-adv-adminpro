@@ -19,6 +19,11 @@
 .w140{
     width: 140px;
 }
+
+.w250{
+    width: 250px;
+}
+
 .avatar{
     border:1px solid gray;
     border-radius: 100%;
